@@ -21,7 +21,9 @@ def get_month_title_by_number(month_number: int):
 
 
 def get_month_title_view(request, month_number: int):
-    if 1 <= month_number <= 12:
-        return HttpResponse(get_month_title_by_number(month_number))
-    else:
+    if month_number < 1 or month_number > 12:
         return HttpResponseNotFound('Месяца с таким номером не существует')
+    
+    month_title = get_month_title_by_number(month_number)
+    return HttpResponse(month_title)
+        
